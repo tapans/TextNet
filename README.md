@@ -30,7 +30,7 @@ Where mode is one of:
 </ol>
 
 Suppose you send the following text to the twilio number:<br>
-<b>transit from square one go station to toronto union station</b>
+<b>transit</b> <b>from</b> square one go station <b>to</b> toronto union station
 
 The response would be the following text:
 <pre>
