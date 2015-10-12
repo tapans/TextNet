@@ -19,7 +19,7 @@ Get directions to locations using only SMS / text messages using Twilio and Goog
 
 ## Usage
 From your mobile device, send a text message to your configured twilio number in the following format:<br>
-<b>Mode</b> <b>from</b> ADDRESS/POSTAL CODE <b>to</b> ADDRESS/POSTAL CODE
+<b>Mode</b> <b>from</b> ADDRESS/POSTAL CODE <b>to</b> ADDRESS/POSTAL CODE <b>with</b> [OPTIONS]
 
 Where mode is one of:
 <ol>
