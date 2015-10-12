@@ -29,10 +29,10 @@ Where mode is one of:
   <li>driving (default)</li> 
 </ol>
 
-Suppose the following text was sent to the twilio number:<br>
+Suppose you send the following text to the twilio number:<br>
 <b>transit from square one go station to toronto union station</b>
 
-The response would be:
+The response would be the following text:
 <pre>
  Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
 (34.8 km in 1 hour 49 mins)
