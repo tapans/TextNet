@@ -29,7 +29,7 @@ app.post('/respond_to_sms', function(req, res){
 	if (mssgClient.validateExpressRequest(req, authToken, options)){
 		var command = req.body.Body;		
 		var mode = command.split(sourceKeyword)[0].trim();		
-		var source = command.substring(command.indexOf(sourceKeyword + sourceKeyword.length), command.indexOf(destinationKeyword)).trim();
+		var source = command.substring(command.indexOf(sourceKeyword) + sourceKeyword.length, command.indexOf(destinationKeyword)).trim();
 		var destination = command.substring(command.indexOf(destinationKeyword) + destinationKeyword.length).trim();
 
 		var twiml = new mssgClient.TwimlResponse();
