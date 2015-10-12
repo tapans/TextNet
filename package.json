@@ -1,0 +1,22 @@
+{
+  "name": "twilio-endpoint",
+  "version": "0.0.0",
+  "description": "Handle and respond to incoming direction request texts ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sms",
+    "directions",
+    "twilio",
+    "google maps api"    
+  ],
+  "dependencies": {
+    "express": "*",
+    "twilio": "*",
+    "body-parser": "~1.14.1"
+  },
+  "author": "Tapan Shah",
+  "license": "BSD-2-Clause"
+}
