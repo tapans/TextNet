@@ -18,7 +18,7 @@ Get directions to locations using only SMS / text messages using Twilio and Goog
 </ol>
 
 ## Usage
-From your mobile device, send a text message to your twilio number in the following format:<br>
+From your mobile device, send a text message to your configured twilio number in the following format:<br>
 <b>Mode</b> <b>from</b> ADDRESS/POSTAL CODE <b>to</b> ADDRESS/POSTAL CODE
 
 Where mode is one of:
@@ -29,23 +29,115 @@ Where mode is one of:
   <li>driving (default)</li> 
 </ol>
 
-Suppose you send the following text to the twilio number:<br>
-<b>transit</b> <b>from</b> square one go station <b>to</b> toronto union station
+Additional options can be followed by the keyword "<b>with</b>" after the destination address.
+Supported options are:
+<ol>
+  <li>alternatives</li>
+  <li>less walking</li>
+  <li>less transfers</li>
+  <li>arrival time of <b>dateString</b></li>
+  <li>departure time of <b>dateString</b></li>
+</ol>
+
+### Examples
+<ul>
+    <li>
+<b>transit from square one go station to toronto union station</b>
 
 The response would be the following text:
 <pre>
  Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
-(34.8 km in 1 hour 49 mins)
-3:57am - 5:45am
+(30.0 km in 53 mins)
+7:30pm - 8:23pm
+
+1. GO Transit Transit 21: Bus towards 21P - Union Station (6 stops). Depart Square One at 7:30pm and arrive at Union Station Bus Terminal at 8:20pm. (29.8 km in 50 mins)
+2. Head west toward Bay St (38 m in 1 min)
+3. Turn right onto Bay St (50 m in 1 min)
+4. Turn left onto Front St WDestination will be on the left (0.2 km in 2 mins)
+</pre>
+  </li>
+<li>
+<b>Transit from square one go station to toronto union station with arrival time of 9pm today</b>
+<pre>
+Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(37.0 km in 59 mins)
+7:57pm - 8:55pm
+
 1. Head southeast on Station Gate Rd toward Rathburn Rd W (47 m in 1 min)
 2. Turn right onto Rathburn Rd W (0.2 km in 3 mins)
 3. Turn right onto Duke of York Blvd (0.2 km in 3 mins)
 4. Turn right onto Centre View DrDestination will be on the left (0.2 km in 2 mins)
-5. GO Transit: Bus towards 40 - Richmond Hill Centre (1 stops). Depart Square One at 4:05am and arrive at Renforth and Convair at 4:15am. (9.7 km in 10 mins)
-6. Walk to Renforth Dr at Convair Dr (53 m in 1 min)
-7. TTC: Bus towards East - 332 Eglinton West Blue Night Towards Eglinton Station (50 stops). Depart Renforth Dr at Convair Dr at 4:35am and arrive at Eglinton Ave West at Yonge St at 5:09am. (16.9 km in 34 mins)
-8. Walk to Yonge St at Eglinton Ave West (Eglinton Station) (0.1 km in 2 mins)
-9. TTC: Bus towards South - 320 Yonge Blue Night Towards Queens Quay (31 stops). Depart Yonge St at Eglinton Ave West (Eglinton Station) at 5:22am and arrive at Bay St at Front St West (Union Station) at 5:42am. (7.2 km in 21 mins)
-10. Head south on Bay St toward Front St W (23 m in 1 min)
-11. Turn right onto Front St WDestination will be on the left (0.1 km in 2 mins)
+5. GO Transit Transit 40: Bus towards 40 - Richmond Hill Centre (2 stops). Depart Square One at 8:05pm and arrive at Pearson Airport at 8:20pm. (11.6 km in 15 mins)
+6. Walk to UP Express Pearson Airport (70 m in 1 min)
+7. Walk to UP Express Pearson Airport (1 m in 1 min)
+8. Walk to UP Express Pearson Airport (51 m in 1 min)
+9. UP Express Transit UP: Train towards UP Express Union Station (3 stops). Depart UP Express Pearson Airport at 8:27pm and arrive at UP Express Union Station at 8:52pm. (24.3 km in 25 mins)
+10. Walk to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada (0.2 km in 3 mins)
+11. Head east on Front St W toward Bay StDestination will be on the right (0.1 km in 1 min)
+</pre>
+</li>
+<li>
+<b>Transit from square one go station to toronto union station with alternatives</b>
+(3 texts returned)
+<pre>
+Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(30.0 km in 53 mins)
+7:30pm - 8:23pm
+
+1. GO Transit Transit 21: Bus towards 21P - Union Station (6 stops). Depart Square One at 7:30pm and arrive at Union Station Bus Terminal at 8:20pm. (29.8 km in 50 mins)
+2. Head west toward Bay St (38 m in 1 min)
+3. Turn right onto Bay St (50 m in 1 min)
+4. Turn left onto Front St WDestination will be on the left (0.2 km in 2 mins)
+
+-------------Alternative Route-------------
+
+Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(29.9 km in 1 hour 7 mins)
+7:37pm - 8:44pm
+
+1. Head southeast on Station Gate Rd toward Rathburn Rd W (47 m in 1 min)
+2. Turn left onto Rathburn Rd W (90 m in 1 min)
+3. Turn rightDestination will be on the right (0.1 km in 2 mins)
+4. MiWay Transit 19: Bus towards Southbound (29 stops). Depart City Centre Bus Terminal Platform D at 7:40pm and arrive at Port Credit Go Station Platform 6 at 8:02pm. (8.4 km in 22 mins)
+5. Walk to Port Credit GO (0.1 km in 2 mins)
+6. Walk to Port Credit GO (73 m in 1 min)
+7. GO Transit Transit LW: Train towards LW-Union Station (4 stops). Depart Port Credit GO at 8:11pm and arrive at Union Station at 8:40pm. (20.7 km in 29 mins)
+8. Walk to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada (31 m in 1 min)
+9. Head east on The PATH - Union-VIA-GO toward The PATH - Union Station
+10. Turn left onto Bay St (36 m in 1 min)
+11. Turn left onto Front St WDestination will be on the left (0.1 km in 2 mins)
+
+-------------Alternative Route-------------
+
+Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(27.8 km in 1 hour 13 mins)
+7:31pm - 8:44pm
+
+1. Head southeast on Station Gate Rd toward Rathburn Rd W (47 m in 1 min)
+2. Turn right onto Rathburn Rd WDestination will be on the left (32 m in 1 min)
+3. MiWay Transit 20: Bus towards Eastbound (47 stops). Depart City Centre Bus Terminal Platform L at 7:33pm and arrive at Islington Subway Drop Off at 8:04pm. (13.4 km in 31 mins)
+4. Walk to Islington Station - Eastbound Platform (38 m in 1 min)
+5. TTC Transit 2: Subway towards Line 2 (Bloor-Danforth) (13 stops). Depart Islington Station - Eastbound Platform at 8:10pm and arrive at Spadina Station - Eastbound Platform at 8:29pm. (10.2 km in 19 mins)
+6. Walk to Spadina Station - Southbound Platform (19 m in 1 min)
+7. TTC Transit 1: Subway towards Line 1 (Yonge-University) (7 stops). Depart Spadina Station - Southbound Platform at 8:33pm and arrive at UNION STATION - NORTHBOUND PLATFORM towards FINCH at 8:42pm. (3.9 km in 9 mins)
+8. Head north on Bay St toward Front St W (36 m in 1 min)
+9. Turn left onto Front St WDestination will be on the left (0.1 km in 2 mins)
+
+-------------Alternative Route-------------
+
+Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(37.0 km in 59 mins)
+7:57pm - 8:55pm
+
+1. Head southeast on Station Gate Rd toward Rathburn Rd W (47 m in 1 min)
+2. Turn right onto Rathburn Rd W (0.2 km in 3 mins)
+3. Turn right onto Duke of York Blvd (0.2 km in 3 mins)
+4. Turn right onto Centre View DrDestination will be on the left (0.2 km in 2 mins)
+5. GO Transit Transit 40: Bus towards 40 - Richmond Hill Centre (2 stops). Depart Square One at 8:05pm and arrive at Pearson Airport at 8:20pm. (11.6 km in 15 mins)
+6. Walk to UP Express Pearson Airport (70 m in 1 min)
+7. Walk to UP Express Pearson Airport (1 m in 1 min)
+8. Walk to UP Express Pearson Airport (51 m in 1 min)
+9. UP Express Transit UP: Train towards UP Express Union Station (3 stops). Depart UP Express Pearson Airport at 8:27pm and arrive at UP Express Union Station at 8:52pm. (24.3 km in 25 mins)
+10. Walk to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada (0.2 km in 3 mins)
+11. Head east on Front St W toward Bay StDestination will be on the right (0.1 km in 1 min)
 </pre>
