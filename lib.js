@@ -38,8 +38,10 @@ exports.parseAndProcessCommand = function(command, googleMapsApiKey, sendRespons
 function getDirections(mode, origin, destination, alternatives, arrivalTime, departureTime, routePreference, googleMapsApiKey, callback){
 	var origin = origin || 'streetsville go station';
 	var destination = destination || 'toronto union station';
-	var mode = mode === "walk" ? "walking" : mode || 'transit';
-
+	if (mode === "walk") mode = "walking";
+	else if (mode === "bike") mode = "bicycling";
+	else mode = mode || "transit";
+      	
 	var alternatives = alternatives || false;
 	var params = "origin="+origin+"&destination="+destination+"&mode="+mode+"&alternatives="+alternatives;	
 	if (routePreference) params+="&transit_routing_preference="+routePreference;
