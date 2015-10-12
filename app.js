@@ -93,9 +93,10 @@ function generateMssg(mode, data){
 					case "walking":
 						var walkingSteps = step.steps;
 						var numWalkingSteps = walkingSteps.length;
+
 						for (var k = 0; k < numWalkingSteps; k++){
-							var walkingStep = walkingSteps[k];
-							mssg += printStep(stepNum, walkingStep.html_instructions, walkingStep.distance.text, walkingStep.duration.text);
+							var walkingStep = walkingSteps[k];										
+							mssg += printStep(stepNum, walkingStep.html_instructions || step.html_instructions, walkingStep.distance.text, walkingStep.duration.text);
 							stepNum++;
 						}
 						break;
