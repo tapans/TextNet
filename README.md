@@ -28,6 +28,24 @@ Where mode is one of:
   <li>bicycling</li>
   <li>driving (default)</li> 
 </ol>
-### Examples
-<ul>
-</ul>
+
+Suppose you send the following text to the twilio number:<br>
+<b>transit from square one go station to toronto union station</b>
+
+The response would be the following text:
+<pre>
+ Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L5B, Canada to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada. 
+(34.8 km in 1 hour 49 mins)
+3:57am - 5:45am
+1. Head southeast on Station Gate Rd toward Rathburn Rd W (47 m in 1 min)
+2. Turn right onto Rathburn Rd W (0.2 km in 3 mins)
+3. Turn right onto Duke of York Blvd (0.2 km in 3 mins)
+4. Turn right onto Centre View DrDestination will be on the left (0.2 km in 2 mins)
+5. GO Transit: Bus towards 40 - Richmond Hill Centre (1 stops). Depart Square One at 4:05am and arrive at Renforth and Convair at 4:15am. (9.7 km in 10 mins)
+6. Walk to Renforth Dr at Convair Dr (53 m in 1 min)
+7. TTC: Bus towards East - 332 Eglinton West Blue Night Towards Eglinton Station (50 stops). Depart Renforth Dr at Convair Dr at 4:35am and arrive at Eglinton Ave West at Yonge St at 5:09am. (16.9 km in 34 mins)
+8. Walk to Yonge St at Eglinton Ave West (Eglinton Station) (0.1 km in 2 mins)
+9. TTC: Bus towards South - 320 Yonge Blue Night Towards Queens Quay (31 stops). Depart Yonge St at Eglinton Ave West (Eglinton Station) at 5:22am and arrive at Bay St at Front St West (Union Station) at 5:42am. (7.2 km in 21 mins)
+10. Head south on Bay St toward Front St W (23 m in 1 min)
+11. Turn right onto Front St WDestination will be on the left (0.1 km in 2 mins)
+</pre>
