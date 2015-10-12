@@ -28,7 +28,7 @@ Where mode is one of:
   <li>bicycling</li>
   <li>driving (default)</li> 
 </ol>
-### Example
+
 Suppose the following text was sent to the twilio number:<br>
 <b>transit from square one go station to toronto union station</b>
 
