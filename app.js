@@ -1,8 +1,8 @@
-var fs    = require('fs');
-var express = require('express');
+var fs         = require('fs');
+var express    = require('express');
 var bodyParser = require('body-parser');
 var mssgClient = require('twilio');
-var lib = require('./lib.js');
+var lib        = require('./lib.js');
 
 fs.readdirSync(__dirname + "/env").forEach(function (file) {
     if (!process.env[file]) {
@@ -28,7 +28,9 @@ app.post('/respond_to_sms', function(req, res){
 		var command = req.body.Body;	
 		lib.parseAndProcessCommand(command, googleMapsApiKey, function(mssgs){			
 			var twiml = new mssgClient.TwimlResponse();
-			for (var i=0; i<mssgs.length;i++){
+			var numMssgs = mssgs.length;
+			var i;
+			for (i=0; i<numMssgs;i++){
 				twiml.message(mssgs[i]);	
 			}	
 			res.type('text/xml');
