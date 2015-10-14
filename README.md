@@ -21,12 +21,13 @@ Make arbitrary queries to google and get as many as 10 results at once (default 
 
 ### Usage
 From your mobile device, send a text message to your configured twilio number in the following format:<br>
-<b>arbitrary query <b>limit</b> [1-10]
-(if no limit given, defaults to 1).
+<b>arbitrary query <b>limit</b> n
+<br>(if no limit given, defaults to 1. max 10).
 
 #### Examples
 <ul>
-    <li>define love
+    <li>
+    <b>define love</b><br>
     
     The response would be the following text:
 <pre>
@@ -40,7 +41,7 @@ http://www.wikihow.com/Define-Love
 </pre>
   </li>
   <li>
-  movies limit 3
+ <b>movies limit 3</b><br>
   
 Results in following 3 texts:
 <pre>
