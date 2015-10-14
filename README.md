@@ -21,7 +21,7 @@ Make arbitrary queries to google and get as many as 10 results at once (default 
 
 ### Usage
 From your mobile device, send a text message to your configured twilio number in the following format:<br>
-<b>arbitrary query <b>limit</b> n
+<b>arbitrary query </b>limit</b> n
 <br>(if no limit given, defaults to 1. max 10).
 
 #### Examples
