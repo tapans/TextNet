@@ -41,7 +41,7 @@ http://www.wikihow.com/Define-Love
 </pre>
   </li>
   <li>
- <b>movies limit 3</b><br>
+ <b>computer science resources limit 3</b><br>
   
 Results in following 3 texts:
 <pre>
