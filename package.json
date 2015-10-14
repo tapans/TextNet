@@ -10,12 +10,13 @@
     "sms",
     "directions",
     "twilio",
-    "google maps api"    
+    "google maps api"
   ],
   "dependencies": {
     "express": "*",
     "twilio": "*",
-    "body-parser": "~1.14.1"
+    "body-parser": "~1.14.1",
+    "googleapis": "~2.1.5"
   },
   "author": "Tapan Shah",
   "license": "BSD-2-Clause"

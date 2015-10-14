@@ -16,8 +16,8 @@ exports.parseDate = function(string){
 		var month = today.getMonth() + 1;
 		var day = today.getDate();
 
-		var todayRegex = new RegExp(/([\d:]+)\s*(?:(am|pm)?)\stoday/);
-		var tomorrowRegex = new RegExp(/([\d:]+)\s*(?:(am|pm)?)\stomorrow/);
+		var todayRegex = new RegExp(/([\d:]+)\s*(?:(am|pm)?)\stoday/i);
+		var tomorrowRegex = new RegExp(/([\d:]+)\s*(?:(am|pm)?)\stomorrow/i);
 		var stringMatchesToday = string.match(todayRegex);
 		var stringMatchesTomorrow = string.match(tomorrowRegex);
 		if (stringMatchesToday){
@@ -25,8 +25,8 @@ exports.parseDate = function(string){
 			var period = stringMatchesToday[2];			
 			return getDate(month, day, year, time, period);
 		} else if(stringMatchesTomorrow){
-			var time = fixTime(stringMatch[1]);
-			var period = stringMatch[2];
+			var time = fixTime(stringMatchesTomorrow[1]);
+			var period = stringMatchesTomorrow[2];
 			day = day+1;
 			return getDate(month, day, year, time, period);
 		}

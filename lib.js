@@ -1,5 +1,6 @@
 var request = require('request');
 var utils = require('./utils.js');
+var google = require('googleapis');
 
 var sourceKeyword = " from ";
 var destinationKeyword = " to ";
@@ -9,10 +10,77 @@ var departingTimeKeyword = "departure time of";
 var arrivalTimeKeyword = "arrival time of";
 var lessWalkingPreference = "less walking";
 var fewTransfersPreference = "less transfers";
+
+var defaultNumResults = 1;
 var characterLimit = 1550;
 
-exports.parseAndProcessCommand = function(command, googleMapsApiKey, sendResponse){
+exports.parseAndProcessCommand = function(command, sendResponse){
+	var apiKey = process.env.API_KEY;
+	var command = command.toLowerCase();
 	console.log(command);
+	if (directionsCommand(command)){
+		return invokeGoogleMapsAPI(command, apiKey, sendResponse);
+	} else {
+		return invokeCustomSearchAPI(command, apiKey, sendResponse);
+	}
+}
+
+function directionsCommand(command){
+	if (command.indexOf("transit") === 0
+		|| command.indexOf("walking") === 0
+		|| command.indexOf("walk") === 0
+		|| command.indexOf("bicycling") === 0
+		|| command.indexOf("bike") === 0
+		|| command.indexOf("driving") === 0
+		|| command.indexOf("drive") === 0){
+		return true;
+	}
+	return false;
+}
+
+function invokeCustomSearchAPI(command, apiKey, sendResponse){
+	//format: query [limit n]
+	var commandRegex = new RegExp("([\\w\\s]+)");
+	var commandRegexWithLimit = new RegExp("([\\w\\s]+)\\s*limit\\s*(\\d+)");
+	if (command.indexOf("limit") !== -1){
+		var commandMatch = command.match(commandRegexWithLimit);
+		var numResults = commandMatch ? commandMatch[2] : defaultNumResults;
+	} else {
+		var commandMatch = command.match(commandRegex);
+	}
+	var numResults = numResults || defaultNumResults;
+	var query = commandMatch ? commandMatch[1] : "mississauga weather";
+	
+	var customsearch = google.customsearch('v1');
+	var CX = process.env.CX;
+	console.log(CX, apiKey, query, numResults);
+
+	customsearch.cse.list({ cx: CX, q: query, auth: apiKey, num: numResults}, function(err, resp) {
+	  if (err) {
+	    console.log('An error occured', err);
+	    return;
+	  }
+	  // Got the response from custom search
+	  console.log('Result: ' + resp.searchInformation.formattedTotalResults);
+	  console.log(resp.items[0]);
+	  var items = resp.items;
+	  var numItems = items.length;
+	  if (items && numItems > 0) {
+	  	var mssgs = [];
+	  	var mssg, title, content, link;
+	  	for (var i=0;i<numItems;i++){
+	  		title = items[i].title;
+	  		content = items[i].snippet;
+	  		link = items[i].link;
+	  		mssg = title + "\n\n" + content + "\n\n" + link;
+	  		mssgs.push(mssg);
+	  	}
+	    sendResponse(mssgs);
+	  }
+	});
+}
+
+function invokeGoogleMapsAPI(command, googleMapsApiKey, sendResponse){
 	var commandParts = command.split(destinationSeparator);
 	var mainCommand = commandParts[0];	
 	var mode = mainCommand.split(sourceKeyword)[0].trim().toLowerCase();				

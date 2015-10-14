@@ -13,7 +13,7 @@ fs.readdirSync(__dirname + "/env").forEach(function (file) {
 var authToken = process.env.AUTH_TOKEN;
 var port = process.env.PORT;
 var endpointUrl = process.env.ENDPOINT_URL;
-var googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,15 +26,15 @@ app.post('/respond_to_sms', function(req, res){
 	};
 	if (mssgClient.validateExpressRequest(req, authToken, options)){
 		var command = req.body.Body;	
-		lib.parseAndProcessCommand(command, googleMapsApiKey, function(mssgs){			
+		lib.parseAndProcessCommand(command, function(mssgs){			
 			var twiml = new mssgClient.TwimlResponse();
 			var numMssgs = mssgs.length;
 			var i;
 			for (i=0; i<numMssgs;i++){
 				twiml.message(mssgs[i]);	
-			}	
+			}
+			console.log(twiml.toString());
 			res.type('text/xml');
-			console.log("sending: " + twiml);
 			res.send(twiml.toString());
 		});			
 	} else {
