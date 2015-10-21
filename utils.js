@@ -1,3 +1,6 @@
+var request = require('request');
+var htmlToText = require('html-to-text');
+
 exports.capitalize = function(string){
 	return string[0].toUpperCase() + string.slice(1);
 }
@@ -31,6 +34,32 @@ exports.parseDate = function(string){
 			return getDate(month, day, year, time, period);
 		}
 	}
+}
+
+exports.httpGet = function(url, callback){
+	url = addProtocol(url);
+	console.log(url);
+	request(url, function (error, response, body) {		
+	    if (!error && response.statusCode == 200) {
+	    	var content = htmlToText.fromString(body, {
+							    wordwrap: 130
+							});
+	    	console.log(content);
+	        return callback(null, response, content);
+	    } else {
+	    	console.log(error);
+	    	return callback(error);
+	    }
+	});
+}
+
+function addProtocol(url){
+	if (!(url.indexOf("http") === 0) && !(url.indexOf('https') === 0)){
+		return "http://"+url;
+	} else {
+		return url;
+	}
+
 }
 
 function fixTime(time){

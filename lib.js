@@ -11,6 +11,8 @@ var arrivalTimeKeyword = "arrival time of";
 var lessWalkingPreference = "less walking";
 var fewTransfersPreference = "less transfers";
 
+var browseWebpageKeyword = "go to ";
+
 var defaultNumResults = 1;
 var characterLimit = 1550;
 
@@ -20,8 +22,18 @@ exports.parseAndProcessCommand = function(command, sendResponse){
 	console.log(command);
 	if (directionsCommand(command)){
 		return invokeGoogleMapsAPI(command, apiKey, sendResponse);
+	} else if (webpageCommand(command)){
+		return browseWebpage(command, sendResponse);
 	} else {
 		return invokeCustomSearchAPI(command, apiKey, sendResponse);
+	}
+}
+
+function webpageCommand(command){
+	if (command.indexOf("http://") === 0
+		|| command.indexOf("https://") === 0
+		|| command.indexOf(browseWebpageKeyword) === 0){
+		return true;
 	}
 }
 
@@ -36,6 +48,22 @@ function directionsCommand(command){
 		return true;
 	}
 	return false;
+}
+
+function browseWebpage(command, sendResponse){
+	var url;
+	if (command.indexOf(browseWebpageKeyword) === 0){
+		url = command.split(browseWebpageKeyword)[1];
+		console.log(url);
+		utils.httpGet(url, function(err, resp, content){
+			if (err){
+				return sendResponse(err);
+			} else {
+				var mssgs = splitIntoMultipleMssgs(content);
+				return sendResponse(mssgs);
+			}			
+		})
+	}
 }
 
 function invokeCustomSearchAPI(command, apiKey, sendResponse){
@@ -98,7 +126,7 @@ function invokeGoogleMapsAPI(command, googleMapsApiKey, sendResponse){
 	
 	var steps = getDirections(mode, source, destination, alternatives, arrivalTime, departureTime, routePreference, googleMapsApiKey, onDirectionsReturned);	
 	function onDirectionsReturned(mssg){
-		var mssgs = splitIntoMultipleMssgs(mssg, characterLimit);		 
+		var mssgs = splitIntoMultipleMssgs(mssg);		 
 		sendResponse(mssgs);		
 	};
 }
@@ -226,7 +254,7 @@ function createTransitStepLine(stepNum, agency, departureStopName, departureTime
 	return line;
 }
 
-function splitIntoMultipleMssgs(mssg, characterLimit){
+function splitIntoMultipleMssgs(mssg){
 	var mssgs = [];
 	var temp = "";	
 	var c = 0;
