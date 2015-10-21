@@ -1,5 +1,8 @@
 var request = require('request');
 var htmlToText = require('html-to-text');
+var cheerio = require('cheerio');
+
+var onlyGetBody = true;
 
 exports.capitalize = function(string){
 	return string[0].toUpperCase() + string.slice(1);
@@ -41,9 +44,7 @@ exports.httpGet = function(url, callback){
 	console.log(url);
 	request(url, function (error, response, body) {		
 	    if (!error && response.statusCode == 200) {
-	    	var content = htmlToText.fromString(body, {
-							    wordwrap: 130
-							});
+	    	var content = getRelevantContentFromWebpage(body);	    	
 	    	console.log(content);
 	        return callback(null, response, content);
 	    } else {
@@ -53,6 +54,14 @@ exports.httpGet = function(url, callback){
 	});
 }
 
+function getRelevantContentFromWebpage(body){
+	$ = cheerio.load(body);
+	if (onlyGetBody){
+		body = $("body").html();
+	} 
+	var text = htmlToText.fromString(body, { wordwrap: 130 });
+	return text;
+}
 function addProtocol(url){
 	if (!(url.indexOf("http") === 0) && !(url.indexOf('https') === 0)){
 		return "http://"+url;
