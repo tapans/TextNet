@@ -5,7 +5,7 @@
 <li>npm install</li>
 <li>Make and configure a Twilio Account. Be sure to get a number, and configure your SMS request url to point to your server endpoint</li>
 <li>Get Google Maps API key</li>
-<liCcreate the following files in env directory:
+<li>Create the following files in the env directory:
   <ul>
     <li><b>AUTH_TOKEN</b>: Store your Twilio auth token in this file.</li>
     <li><b>GOOGLE_MAPS_API_KEY</b>: Store your google maps api key in this file.</li>
