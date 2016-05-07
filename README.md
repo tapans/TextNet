@@ -11,6 +11,7 @@
     <li><b>GOOGLE_MAPS_API_KEY</b>: Store your google maps api key in this file.</li>
     <li><b>PORT</b>: Store the port number to run your app on in this file.</li>
     <li><b>ENDPOINT_URL</b>: Store the full web url of your server endpoint in this file.</li>
+    <li><b>CX</b>: Store the cx ID for Google Custom Search API. [See this](http://stackoverflow.com/questions/6562125/getting-a-cx-id-for-custom-search-google-api-python)
   </ul>
 </li>
 <li>node app.js &</li>

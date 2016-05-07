@@ -1,8 +1,9 @@
 var fs         = require('fs');
+var https      = require('https');
 var express    = require('express');
 var bodyParser = require('body-parser');
 var mssgClient = require('twilio');
-var lib        = require('./lib.js');
+var lib        = require('./lib/lib');
 
 fs.readdirSync(__dirname + "/env").forEach(function (file) {
     if (!process.env[file]) {
@@ -13,18 +14,19 @@ fs.readdirSync(__dirname + "/env").forEach(function (file) {
 var authToken = process.env.AUTH_TOKEN;
 var port = process.env.PORT;
 var endpointUrl = process.env.ENDPOINT_URL;
+var allowed_numbers = process.env.ALLOWED_NUMS.split(",");
 
-
-var app = express();
+var credentials = {key: fs.readFileSync("/etc/apache2/ssl/private.key.passless"), cert: fs.readFileSync("/etc/apache2/ssl/ssl.crt")};
+var app = express(credentials);
+var secureServer = https.createServer(credentials, app).listen(port);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.listen(port);
 console.log("Listening for incoming connections on port: " + port);
 
 app.post('/respond_to_sms', function(req, res){	
 	var options = {
 		url: endpointUrl
 	};
-	if (mssgClient.validateExpressRequest(req, authToken, options)){
+	if (mssgClient.validateExpressRequest(req, authToken, options) && allowed_numbers.indexOf(req.body.From) !== -1){
 		var command = req.body.Body;	
 		lib.parseAndProcessCommand(command, function(mssgs){			
 			var twiml = new mssgClient.TwimlResponse();
@@ -38,6 +40,7 @@ app.post('/respond_to_sms', function(req, res){
 			res.send(twiml.toString());
 		});			
 	} else {
+		console.log(req.body.Body);
 		res.type('text/xml');
 		res.send('you are not authorized. good bye!');
 	}
