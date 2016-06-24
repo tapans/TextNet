@@ -15,6 +15,7 @@ var authToken = process.env.AUTH_TOKEN;
 var port = process.env.PORT;
 var endpointUrl = process.env.ENDPOINT_URL;
 var allowed_numbers = process.env.ALLOWED_NUMS.split(",");
+var maxResponseTexts = process.env.MAX_RESPONSE_TEXTS || 5;
 
 var credentials = {key: fs.readFileSync("/etc/apache2/ssl/private.key.passless"), cert: fs.readFileSync("/etc/apache2/ssl/ssl.crt")};
 var app = express(credentials);
@@ -32,8 +33,12 @@ app.post('/respond_to_sms', function(req, res){
 			var twiml = new mssgClient.TwimlResponse();
 			var numMssgs = mssgs.length;
 			var i;
-			for (i=0; i<numMssgs;i++){
-				twiml.message(mssgs[i]);	
+			if (numMssgs > maxResponseTexts){
+				twiml.message("Response message too long!");
+			} else {
+				for (i=0; i<numMssgs;i++){
+					twiml.message(mssgs[i]);
+				}
 			}
 			console.log(twiml.toString());
 			res.type('text/xml');
