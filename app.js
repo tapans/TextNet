@@ -17,9 +17,15 @@ var endpointUrl = process.env.ENDPOINT_URL;
 var allowed_numbers = process.env.ALLOWED_NUMS.split(",");
 var maxResponseTexts = process.env.MAX_RESPONSE_TEXTS || 5;
 
-var credentials = {key: process.env.ssl_key), cert: process.env.ssl_cert)};
-var app = express(credentials);
-var secureServer = https.createServer(credentials, app).listen(port);
+if (process.env.SSL_KEY !== null && process.env.SSL_CERT !== null){
+	var credentials = {key: process.env.SSL_KEY), cert: process.env.SSL_CERT)};	
+	var app = express(credentials);
+	var secureServer = https.createServer(credentials, app).listen(port);
+} else {
+	var app = express();
+	app.listen(port);
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 console.log("Listening for incoming connections on port: " + port);
 
