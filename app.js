@@ -17,7 +17,7 @@ var endpointUrl = process.env.ENDPOINT_URL;
 var allowed_numbers = process.env.ALLOWED_NUMS.split(",");
 var maxResponseTexts = process.env.MAX_RESPONSE_TEXTS || 5;
 
-var credentials = {key: fs.readFileSync("/etc/apache2/ssl/private.key.passless"), cert: fs.readFileSync("/etc/apache2/ssl/ssl.crt")};
+var credentials = {key: process.env.ssl_key), cert: process.env.ssl_cert)};
 var app = express(credentials);
 var secureServer = https.createServer(credentials, app).listen(port);
 app.use(bodyParser.urlencoded({ extended: true }));
