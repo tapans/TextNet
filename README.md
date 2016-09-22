@@ -18,64 +18,6 @@
 <li>node app.js &</li>
 </ol>
 
-## Search the web
-Make arbitrary queries to google and get as many as 10 results at once (default 1)
-
-### Usage
-From your mobile device, send a text message to your configured twilio number in the following format:<br>
-<b>arbitrary query </b>limit</b> n
-<br>(if no limit given, defaults to 1. max 10).
-
-#### Examples
-<ul>
-    <li>
-    <b>define love</b><br>
-    
-    The response would be the following text:
-<pre>
-How to Define Love: 15 Steps (with Pictures) - wikiHow
-
-Love is difficult to define. How do you avoid confusing it with infatuation or lust? 
-Philosophers and psychologists both have attempted to define love, or at least its
- ...
-
-http://www.wikihow.com/Define-Love
-</pre>
-  </li>
-  <li>
- <b>computer science resources limit 3</b><br>
-  
-Results in following 3 texts:
-<pre>
-<ol><li>
-50+ Killer Resources for Computer Science Students
-
-50+ Killer Online Resources for Computer Science Students. Computer science 
-students are lucky because the Internet is like a living textbook, full of ...
-
-http://www.studyweb.com/50-killer-online-resources-for-computer-science-students/
-</li>
-<li>
-Top ten computer science teaching resources | Teacher Network ...
-
-Jan 24, 2012 ... Top ten computer science teaching resources. A pioneering head of ICT shares 
-some fantastic routes into teaching children code and ...
-
-http://www.theguardian.com/teacher-network/2012/jan/24/top-ten-computer-science-teaching-resources
-</li>
-<li>
-CS Teaching Resources « Exploring Computer Science
-
-Dr. Ron Eglash's homepage which includes links to relevant research and other 
-educational resources www.rpi.edu/~eglash/eglash.htm; Teaching Math and ...
-
-http://www.exploringcs.org/resources/cs-teaching-resources
-</li>
-<ol>
-</pre>
-  </li>
-</ul>
-
 ## Directions-with-SMS
 Get directions to locations using only SMS / text messages using Twilio and Google Maps API
 
@@ -203,3 +145,61 @@ Transit directions from Square One GO Bus Terminal At Station, Mississauga, ON L
 10. Walk to Union Station, 65 Front St W, Toronto, ON M5J 1E6, Canada (0.2 km in 3 mins)
 11. Head east on Front St W toward Bay StDestination will be on the right (0.1 km in 1 min)
 </pre>
+
+## Search the web
+Make arbitrary queries to google and get as many as 10 results at once (default 1)
+
+### Usage
+From your mobile device, send a text message to your configured twilio number in the following format:<br>
+<b>arbitrary query </b>limit</b> n
+<br>(if no limit given, defaults to 1. max 10).
+
+#### Examples
+<ul>
+    <li>
+    <b>define love</b><br>
+    
+    The response would be the following text:
+<pre>
+How to Define Love: 15 Steps (with Pictures) - wikiHow
+
+Love is difficult to define. How do you avoid confusing it with infatuation or lust? 
+Philosophers and psychologists both have attempted to define love, or at least its
+ ...
+
+http://www.wikihow.com/Define-Love
+</pre>
+  </li>
+  <li>
+ <b>computer science resources limit 3</b><br>
+  
+Results in following 3 texts:
+<pre>
+<ol><li>
+50+ Killer Resources for Computer Science Students
+
+50+ Killer Online Resources for Computer Science Students. Computer science 
+students are lucky because the Internet is like a living textbook, full of ...
+
+http://www.studyweb.com/50-killer-online-resources-for-computer-science-students/
+</li>
+<li>
+Top ten computer science teaching resources | Teacher Network ...
+
+Jan 24, 2012 ... Top ten computer science teaching resources. A pioneering head of ICT shares 
+some fantastic routes into teaching children code and ...
+
+http://www.theguardian.com/teacher-network/2012/jan/24/top-ten-computer-science-teaching-resources
+</li>
+<li>
+CS Teaching Resources « Exploring Computer Science
+
+Dr. Ron Eglash's homepage which includes links to relevant research and other 
+educational resources www.rpi.edu/~eglash/eglash.htm; Teaching Math and ...
+
+http://www.exploringcs.org/resources/cs-teaching-resources
+</li>
+<ol>
+</pre>
+  </li>
+</ul>
